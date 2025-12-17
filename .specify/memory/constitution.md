@@ -1,55 +1,37 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# AI Book Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Educational Excellence
+Content must be technically accurate, pedagogically sound, and accessible to the intended audience. All concepts should be explained with appropriate depth for readers with intermediate knowledge of AI and robotics.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Documentation Standards
+Every concept, code example, and technique must be well-documented with practical examples that readers can understand and implement. Maintain consistent formatting and terminology throughout the book.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Code Quality (NON-NEGOTIABLE)
+All code examples must be functional, well-commented, and represent industry best practices. Each code snippet should be tested for correctness and educational value.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Modular Content Organization
+Chapters and sections should be organized in a logical progression that builds upon previous concepts, while allowing for independent reading of individual sections where appropriate.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Technical Accuracy
+All technical claims and explanations must be verified against authoritative sources. When presenting algorithms or techniques, cite original papers and established references.
 
-### [PRINCIPLE_6_NAME]
+### VI. Accessibility and Inclusivity
+Content should be accessible to readers from diverse backgrounds. Avoid jargon without explanation and ensure examples are culturally neutral.
 
+## Additional Constraints
 
-[PRINCIPLE__DESCRIPTION]
+Technology Stack: Docusaurus-based documentation, Markdown formatting, Python code examples, JavaScript where relevant for web components.
+Review Process: All content additions must undergo peer review focusing on technical accuracy and educational effectiveness.
+Testing: Code examples must be validated against actual implementations where possible.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Development Workflow
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Content creation follows the Spec-Driven Development approach with specifications, plans, and tasks documented in the .specify directory. All changes must reference specific tasks or user stories.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution governs all content and technical decisions for the AI book project. All contributors must follow these principles when authoring content or making technical decisions.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-12-16 | **Last Amended**: 2025-12-16

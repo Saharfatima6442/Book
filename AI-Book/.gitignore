@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build directories
+build/
+dist/
+out/
+
+# Environment variables
+.env*
+!.env.example
+
+# Logs
+*.log
+
+# Coverage
+coverage/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Docusaurus
+.docusaurus/
+.temp/
+.cache/
