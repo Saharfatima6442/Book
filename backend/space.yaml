@@ -1,0 +1,8 @@
+# Hugging Face Space Configuration
+
+runtime:
+  cpu: 2
+  memory: 8Gi
+  accelerator: null
+
+sdk: docker
