@@ -49,6 +49,7 @@ const sidebars: SidebarsConfig = {
         'Physical-AI-Humanoid-Robotics/Chapter-08-Edge-AI-Deployment',
         'Physical-AI-Humanoid-Robotics/Chapter-09-Advanced-Perception-Navigation',
         'Physical-AI-Humanoid-Robotics/Chapter-10-AI-Planning-Decision-Making',
+        'Physical-AI-Humanoid-Robotics/Chapter-13-Implementing-Physical-AI-Assistant',
       ],
       collapsed: false,
     },
