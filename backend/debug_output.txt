@@ -1,0 +1,9 @@
+Environment variables check:
+COHERE_API_KEY exists: True
+QDRANT_URL exists: True
+QDRANT_API_KEY exists: True
+
+Actual values:
+COHERE_API_KEY: 0209vxElAE...
+QDRANT_URL: https://eabbbea5-f5f3-48a5-b128-9476fe6cb02d.us-east4-0.gcp.cloud.qdrant.io
+QDRANT_API_KEY: eyJhbGciOi...

@@ -1,82 +1,138 @@
-# Physical AI Book Chatbot API
+# Neon API Chatbot Service
 
-This is the backend API for the Physical AI & Humanoid Robotics book chatbot. It provides natural language processing capabilities to answer questions about the book content.
+This service integrates with Neon PostgreSQL database to provide persistent chatbot functionality with conversation history and user preferences.
 
-## Features
+## Setup
 
-- Natural language interface for book content
-- Context-aware responses
-- Conversation history management
-- Session-based interactions
-- RESTful API design
+### Prerequisites
 
-## Deployment on Hugging Face Spaces
+- Python 3.11+
+- Pip package manager
+- Git
+- Access to Neon PostgreSQL database instance
+- API key for Neon database
 
-This application is designed for deployment on Hugging Face Spaces using the Docker runtime.
+### Installation
 
-### Steps to Deploy on Hugging Face Spaces:
-
-1. **Create a new Space**:
-   - Go to [huggingface.co/spaces](https://huggingface.co/spaces)
-   - Click "Create new Space"
-   - Choose:
-     - **SDK**: Docker
-     - **License**: Choose appropriate license
-     - **Hardware**: CPU Basic or higher (depending on needs)
-
-2. **Repository Structure**:
-   ```
-   ├── app.py          # Application entrypoint for HF Spaces
-   ├── main.py         # FastAPI application
-   ├── requirements.txt # Python dependencies
-   ├── Dockerfile      # Container configuration
-   └── README.md       # This file
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
    ```
 
-3. **Configure Environment**:
-   - Add the required environment variables in the Space settings if needed
-   - For production, add `CHATBOT_API_KEY` for authentication
+2. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
 
-4. **Wait for Deployment**:
-   - Hugging Face will build and deploy your Space automatically
-   - The API will be available at `https://your-username-space-name.hf.space`
+3. Create a virtual environment:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
 
-### API Endpoints
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-- `GET /` - Root endpoint with API information
-- `GET /health` - Health check
-- `POST /chat` - Chat endpoint
-  - Request body: `{"message": "your question", "context": "optional page context", "session_id": "optional session id"}`
-  - Response: `{"response": "AI response", "session_id": "session id", "timestamp": timestamp}`
-- `GET /chat/history/{session_id}` - Get conversation history
-- `DELETE /chat/session/{session_id}` - Clear session
+5. Configure environment variables:
+   - Copy `.env.example` to `.env`
+   - Add your Neon database API key and connection string to the `.env` file
 
-### API Usage Example
+## Environment Variables
 
-```bash
-curl -X POST "https://your-username-space-name.hf.space/chat" \
-  -H "Content-Type: application/json" \
-  -d '{"message": "What is Physical AI?", "context": "Introduction chapter"}'
+Create a `.env` file in the backend directory with the following variables:
+
+```env
+NEON_DB_URL=your_neon_database_url
+NEON_API_KEY=your_neon_api_key
+DB_POOL_SIZE=10
+DB_POOL_OVERFLOW=20
+LOG_LEVEL=INFO
 ```
 
-## Development
+### Secure API Key Management
 
-To run the application locally:
+The application implements secure handling of API keys with the following features:
+
+1. **Environment Variable Storage**: The Neon API key is stored in the `.env` file and loaded at application startup using python-dotenv. This ensures credentials are not hardcoded in the source code.
+
+2. **Validation**: The application validates the format of the API key at startup to ensure it meets expected patterns.
+
+3. **Secure Logging**: A custom logging filter prevents the API key from being exposed in logs or error messages. Any occurrence of the API key in log messages is automatically replaced with `[HIDDEN_API_KEY]`.
+
+4. **Runtime Checking**: The application performs runtime validation of the API key to ensure it remains valid during operation.
+
+5. **Health Checks**: The `/health/config` endpoint validates that the API key exists and is properly formatted without exposing its value.
+
+## Running the Application
+
+1. Activate the virtual environment:
+   ```bash
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+2. Run the application:
+   ```bash
+   python main.py
+   ```
+
+The application will be available at `http://localhost:8000`.
+
+## API Endpoints
+
+### Chat Endpoint
+- `POST /chat` - Send a message to the chatbot and receive a response
+
+### Conversations
+- `GET /conversations?user_id={userId}&limit={limit}&offset={offset}` - Get user's conversations
+- `GET /conversation/{id}` - Get a specific conversation
+- `DELETE /conversation/{id}` - Delete a conversation
+
+### User Preferences
+- `GET /user/{id}/preferences` - Get user preferences
+- `PUT /user/{id}/preferences` - Update user preferences
+
+### Health Checks
+- `GET /health` - Overall service health
+- `GET /health/db` - Database connectivity
+- `GET /health/config` - Configuration validation
+
+## Security Features
+
+1. **API Key Protection**: The Neon API key is never exposed in logs, error messages, or API responses.
+2. **Input Validation**: All API inputs are validated to prevent injection attacks.
+3. **Authentication**: API endpoints require proper authorization headers.
+4. **Rate Limiting**: The service implements rate limiting to prevent abuse (coming soon).
+
+## Database Schema
+
+The application creates the following tables:
+
+- `users`: Stores user information and preferences
+- `conversations`: Tracks conversation threads
+- `messages`: Stores individual messages within conversations
+
+## Error Handling
+
+The application implements comprehensive error handling with appropriate HTTP status codes:
+
+- 400: Bad Request - Invalid input data
+- 401: Unauthorized - Missing or invalid API key
+- 404: Not Found - Requested resource not found
+- 429: Too Many Requests - Rate limit exceeded (coming soon)
+- 500: Internal Server Error - Unexpected server error
+
+## Testing
+
+To run the tests:
 
 ```bash
-pip install -r requirements.txt
-uvicorn main:app --reload
+pytest tests/
 ```
 
-## Architecture
-
-- FastAPI backend with Python
-- Docker containerization for deployment
-- In-memory session storage (for stateless Spaces - persistent DB in production)
-- Mock AI service (integrate with OpenAI, Hugging Face models, or other NLP services in production)
-
-## Note on Hugging Face Spaces Limitations
-
-- Session data is stored in-memory and will reset when the Space hibernates
-- For production use, integrate with a persistent database
-- For cost efficiency, Spaces may hibernate when not in use
+The test suite includes:
+- Unit tests for all models and services
+- Integration tests for database operations
+- Security tests to verify API key protection
