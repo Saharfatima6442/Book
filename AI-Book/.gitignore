@@ -33,3 +33,16 @@ Thumbs.db
 .docusaurus/
 .temp/
 .cache/
+
+.env
+backend/.env
+backend/.venv
+*.env
+
+# Python
+.venv/
+venv/
+__pycache__/
+
+# Node
+node_modules/
